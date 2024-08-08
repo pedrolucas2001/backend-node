@@ -1,39 +1,62 @@
+const fs = require("fs").promises;
+
 class ProductManager {
     #products;
+    #path;
     #id = 0;
 
-    constructor() {
+    constructor(path) {
+        this.#path = path;
         this.#products = [];
     }
 
-    getProduct = () => this.#products;
-
-    addProduct = (nome, descricao, preco, caminhoImg, qtdProdutosNoEstoque) => {
-        this.#id++;
-
-        const produto = {
-            id: this.#id,
-            nome,
-            descricao,
-            preco,
-            caminhoImg,
-            qtdProdutosNoEstoque,
-        };
-
-        this.#products.push(produto);
+    getProducts = async () => {
+        try {
+            const data = await fs.readFile(this.#path, "utf-8");
+            console.log("Data read from file:", data); // Log the raw data
+            this.#products = JSON.parse(data);
+            console.log("Parsed products:", this.#products); // Log the parsed products
+            return this.#products;
+        } catch (error) {
+            if (error.code === 'ENOENT') {
+                return [];
+            } else {
+                console.error("Erro ao ler produtos do arquivo:", error);
+                return [];
+            }
+        }
     }
 
-    getProductById = (id) =>{
-        let produto = this.#products.find(product => product.id === id)
-        return produto;
+
+    addProduct = async ({ nome, descricao, categoria, preco, qtdProdutosNoEstoque }) => {
+        try {
+            await this.getProducts();
+            const produto = {
+                id: this.#id + 1,
+                nome,
+                descricao,
+                categoria,
+                preco,
+                qtdProdutosNoEstoque,
+            };
+            this.#products.push(produto);
+            await fs.writeFile(this.#path, JSON.stringify(this.#products, null, 2));
+            this.#id = produto.id;
+            console.log("Produto adicionado com sucesso:", produto);
+        } catch (error) {
+            console.error("Erro ao adicionar produto:", error);
+        }
     }
 
+    getProductById = async (id) => {
+        try {
+            const produtos = await this.getProducts();
+            return produtos.find(product => product.id === id);
+        } catch (error) {
+            console.error("Erro ao buscar produto por ID:", error);
+            return null;
+        }
+    }
 }
 
-const produtos = new ProductManager();
-produtos.addProduct("Batata", "Batata Inglesa", 5, "caminho.png", 10);
-produtos.addProduct("Cebola", "Cebola Roxa ", 10, "caminho.png", 5);
-produtos.addProduct("Batata Jap", "Batata Japonesa", 5.5, "caminho.png", 20);
-
-console.log("Todos produtos: ", produtos.getProduct());
-console.log("\nProduto por id: ", produtos.getProductById(2));
+module.exports = ProductManager;

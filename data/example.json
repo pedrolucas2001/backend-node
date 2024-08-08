@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "nome": "Camisa Real Madrid Home 2024/25 ",
+    "descricao": "Camisa Real Madrid Home 2023/24 em branco com detalhes dourados. Feita com tecido respirável de alta qualidade, com emblema do clube e logo Adidas. Celebrando o time campeão de 14 títulos da Liga dos Campeões e 35 do Campeonato Espanhol. Disponível em todos os tamanhos.",
+    "categoria": "Torcedor",
+    "preco": 149,
+    "qtdProdutosNoEstoque": 10
+  },
+  {
+    "id": 2,
+    "nome": "Camisa Real Madrid Away 2024/25",
+    "descricao": "Camisa Real Madrid Away 2023/24 em azul marinho com detalhes dourados. Fabricada em tecido respirável de alta qualidade, com emblema do clube e logo Adidas. Celebrando o time campeão de 14 títulos da Liga dos Campeões e 35 do Campeonato Espanhol. Disponível em todos os tamanhos.",
+    "categoria": "Torcedor",
+    "preco": 149,
+    "qtdProdutosNoEstoque": 10
+  },
+  {
+    "id": 3,
+    "nome": "Camisa Manchester City Home 2024/25",
+    "descricao": "Camisa Manchester City Home 2023/24 em azul celeste com detalhes brancos. Fabricada em tecido respirável de alta qualidade, com emblema do clube e logo Puma. Celebrando o time campeão da Premier League e vencedor da Liga dos Campeões na temporada. Disponível em todos os tamanhos.",
+    "categoria": "Torcedor",
+    "preco": 149,
+    "qtdProdutosNoEstoque": 10
+  }
+]
